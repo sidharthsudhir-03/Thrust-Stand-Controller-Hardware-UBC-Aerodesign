@@ -10,3 +10,5 @@ The **Thrust Stand Controller** is a hardware project designed for measuring mot
 - **USB-C Connector**: Provides both power supply and data transfer capabilities.
 - **ESC PWM Control**: Allows real-time adjustments of motor speed during tests via a 2-pin header for PWM control.
 - **Flexible Design**: Added GPIO pin headers and solder pads for easy expansion and motor connection.
+
+The documentation for the hardware design is also attached above.
