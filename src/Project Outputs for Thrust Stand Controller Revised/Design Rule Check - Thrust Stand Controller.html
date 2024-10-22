@@ -1,0 +1,728 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD24\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2024-10-19</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">8:13:25 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc" class="file"><acronym title="C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc">C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">8</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">116</td></tr>
+</table>
+</td>
+</table><a name="IDPDXPRDUIEPNDHN4LHH0JNVSTYIV3T2JJAUGGQEG3ASQZTDHDHPJJ"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNPGCQ2TK41KIJ5QGGYX2NZYR1IOXUDR5DQ1HJ4LZWWHCLUYNLCPB">Zero hole size multi-layer pad(s) detected</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDS0FN3ZM5SMCPMUCTYPA4NBEXOB1NR5I2MWA0TROP201MV5SKZFB">Multilayer Pads with 0 size Hole found</a></td>
+<td class="column2">4</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">8</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID3TX33GAOVZIPGUOQAMZ05CSLKKZJQD5200KFWWOHNLL5MWOAX43M">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYXIUIFZTOQCRNIFPG3HD3THVQEZGHTZ4BDKKOTPI5FK2KPEIMJXL">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDLDO5B3Z5MZWCEWNVXCQT0IULXHJS54JP2JDIY3GDSWXR0JDGOPEH">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDT3ORP0BTZ0HVBMSVGIHAHZGRWBVEJFBQB4ANYPH0RFVCBZX250UE">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDETKBILBPZAF3JOJ2XRCCRV5GMKLFHNROL0XXSRNBLNXVVS2KYBLC">Width Constraint (Min=0.2mm) (Max=1mm) (Preferred=0.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID224WER1LAUQTL14UJHBHL2G5ZMNA3DFAMV1QA0LO0WSNCUGFAHQC">Width Constraint (Min=0.254mm) (Max=0.254mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDF2P5I2EKW54WB5NVHCHSI2PNGKA01BPPFJ4MO4MO3T4XI5MMCMEP">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDV1VW4Y1EZ2TCGREXDJU2G005CKIMAUF2Y0PL4KDQVXOMKCOBMWD">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDE2BP1IXVXF0DGQL5TY2C3N1GSG4EUIETON0MEJLBE3ASA24TBHE">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCZBNE3HCXJBTGKHTN2HTJJQQRNYSTJT1ATQ2Q4MX0ISI3MVCSBLK">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">27</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDW0N2L3MRXP11LU4EZCHMIWYISPD2AGMUSMVLVX1IVYGKWIOAJ">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">81</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQ4K0PJJJ4CEVOC3DGDDAN40YBJ2BEACV2ON4SGIUNL3KNBNQPDJE">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZHBI22NK1XKZGJLONUBDXLNTXGXHE5ZEVNOYK2ENDD3WFXJHCN4K">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDD54JB02YZALCGZQVBLU0CDXZFEC2ADYT0OMHRWMOBMDW4242V4ZI">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">116</td>
+</tr>
+</table><br><a name="IDSM2OMIZLNSC3OYF4LR0ND3R3ZMKULIBVPR3VR3BTTA1MDXNEIP5P"><h2>Warnings</h2></a><a name="IDNPGCQ2TK41KIJ5QGGYX2NZYR1IOXUDR5DQ1HJ4LZWWHCLUYNLCPB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Zero hole size multi-layer pad(s) detected</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236mil|Location2.X=2480mil|Location1.Y=371.85mil|Location2.Y=615.85mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236mil|Location2.X=2480mil|Location1.Y=371.85mil|Location2.Y=615.85mil|Absolute=True">Pad P200-1(59.893mm,12.544mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1182.126mil|Location2.X=2480mil|Location1.Y=122.047mil|Location2.Y=730.591mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1182.126mil|Location2.X=2480mil|Location1.Y=122.047mil|Location2.Y=730.591mil|Absolute=True">Net VBAT</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2237mil|Location2.X=2481mil|Location1.Y=663mil|Location2.Y=907mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2237mil|Location2.X=2481mil|Location1.Y=663mil|Location2.Y=907mil|Absolute=True">Pad P203-1(59.919mm,19.939mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=131.536mil|Location2.X=2481mil|Location1.Y=663mil|Location2.Y=2681.378mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=131.536mil|Location2.X=2481mil|Location1.Y=663mil|Location2.Y=2681.378mil|Absolute=True">Net GND</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=270mil|Location2.X=514mil|Location1.Y=374mil|Location2.Y=618mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=270mil|Location2.X=514mil|Location1.Y=374mil|Location2.Y=618mil|Absolute=True">Pad P201-1(9.957mm,12.598mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=270mil|Location2.X=1172.283mil|Location1.Y=112.205mil|Location2.Y=710.78mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=270mil|Location2.X=1172.283mil|Location1.Y=112.205mil|Location2.Y=710.78mil|Absolute=True">Net VESC</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=270mil|Location2.X=514mil|Location1.Y=664mil|Location2.Y=908mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=270mil|Location2.X=514mil|Location1.Y=664mil|Location2.Y=908mil|Absolute=True">Pad P202-1(9.957mm,19.964mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=131.536mil|Location2.X=2481mil|Location1.Y=663mil|Location2.Y=2681.378mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=131.536mil|Location2.X=2481mil|Location1.Y=663mil|Location2.Y=2681.378mil|Absolute=True">Net GND</acronym></a></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDS0FN3ZM5SMCPMUCTYPA4NBEXOB1NR5I2MWA0TROP201MV5SKZFB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Multilayer Pads with 0 size Hole found</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236mil|Location2.X=2480mil|Location1.Y=371.85mil|Location2.Y=615.85mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236mil|Location2.X=2480mil|Location1.Y=371.85mil|Location2.Y=615.85mil|Absolute=True">Pad P200-1(59.893mm,12.544mm) on Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2237mil|Location2.X=2481mil|Location1.Y=663mil|Location2.Y=907mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2237mil|Location2.X=2481mil|Location1.Y=663mil|Location2.Y=907mil|Absolute=True">Pad P203-1(59.919mm,19.939mm) on Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=270mil|Location2.X=514mil|Location1.Y=374mil|Location2.Y=618mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=270mil|Location2.X=514mil|Location1.Y=374mil|Location2.Y=618mil|Absolute=True">Pad P201-1(9.957mm,12.598mm) on Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=270mil|Location2.X=514mil|Location1.Y=664mil|Location2.Y=908mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=270mil|Location2.X=514mil|Location1.Y=664mil|Location2.Y=908mil|Absolute=True">Pad P202-1(9.957mm,19.964mm) on Multi-Layer</acronym></a></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDV1VW4Y1EZ2TCGREXDJU2G005CKIMAUF2Y0PL4KDQVXOMKCOBMWD"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=82.446mil|Location2.X=217.554mil|Location1.Y=102.446mil|Location2.Y=237.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=82.446mil|Location2.X=217.554mil|Location1.Y=102.446mil|Location2.Y=237.554mil|Absolute=True">Hole Size Constraint: (3.4mm &gt; 2.54mm) Pad Free-MH(3.81mm,4.318mm) on Multi-Layer Actual Hole Size = 3.4mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=94.446mil|Location2.X=229.554mil|Location1.Y=2534.296mil|Location2.Y=2669.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=94.446mil|Location2.X=229.554mil|Location1.Y=2534.296mil|Location2.Y=2669.405mil|Absolute=True">Hole Size Constraint: (3.4mm &gt; 2.54mm) Pad Free-MH(4.115mm,66.087mm) on Multi-Layer Actual Hole Size = 3.4mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2517.446mil|Location2.X=2652.554mil|Location1.Y=2537.446mil|Location2.Y=2672.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2517.446mil|Location2.X=2652.554mil|Location1.Y=2537.446mil|Location2.Y=2672.554mil|Absolute=True">Hole Size Constraint: (3.4mm &gt; 2.54mm) Pad Free-MH(65.659mm,66.167mm) on Multi-Layer Actual Hole Size = 3.4mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2542.446mil|Location2.X=2677.554mil|Location1.Y=107.446mil|Location2.Y=242.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2542.446mil|Location2.X=2677.554mil|Location1.Y=107.446mil|Location2.Y=242.554mil|Absolute=True">Hole Size Constraint: (3.4mm &gt; 2.54mm) Pad Free-MH(66.294mm,4.445mm) on Multi-Layer Actual Hole Size = 3.4mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-1.5mil|Location2.X=1.5mil|Location1.Y=-1.5mil|Location2.Y=1.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-1.5mil|Location2.X=1.5mil|Location1.Y=-1.5mil|Location2.Y=1.5mil|Absolute=True">Hole Size Constraint: (4.572mm &gt; 2.54mm) Pad P200-1(59.893mm,12.544mm) on Multi-Layer Actual Rectangular Hole Width = 4.572mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-1.5mil|Location2.X=1.5mil|Location1.Y=-1.5mil|Location2.Y=1.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-1.5mil|Location2.X=1.5mil|Location1.Y=-1.5mil|Location2.Y=1.5mil|Absolute=True">Hole Size Constraint: (4.572mm &gt; 2.54mm) Pad P201-1(9.957mm,12.598mm) on Multi-Layer Actual Rectangular Hole Width = 4.572mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-1.5mil|Location2.X=1.5mil|Location1.Y=-1.5mil|Location2.Y=1.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-1.5mil|Location2.X=1.5mil|Location1.Y=-1.5mil|Location2.Y=1.5mil|Absolute=True">Hole Size Constraint: (4.572mm &gt; 2.54mm) Pad P202-1(9.957mm,19.964mm) on Multi-Layer Actual Rectangular Hole Width = 4.572mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-1.5mil|Location2.X=1.5mil|Location1.Y=-1.5mil|Location2.Y=1.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-1.5mil|Location2.X=1.5mil|Location1.Y=-1.5mil|Location2.Y=1.5mil|Absolute=True">Hole Size Constraint: (4.572mm &gt; 2.54mm) Pad P203-1(59.919mm,19.939mm) on Multi-Layer Actual Rectangular Hole Width = 4.572mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDCZBNE3HCXJBTGKHTN2HTJJQQRNYSTJT1ATQ2Q4MX0ISI3MVCSBLK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1142.714mil|Location2.X=1153.964mil|Location1.Y=1643.745mil|Location2.Y=1654.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1142.714mil|Location2.X=1153.964mil|Location1.Y=1643.745mil|Location2.Y=1654.995mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad C400-1(28.868mm,41.259mm) on L4 (Signal) And Pad C404-2(28.868mm,42.529mm) on L4 (Signal) [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1083.658mil|Location2.X=1094.908mil|Location1.Y=1643.745mil|Location2.Y=1654.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1083.658mil|Location2.X=1094.908mil|Location1.Y=1643.745mil|Location2.Y=1654.995mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad C400-2(27.368mm,41.259mm) on L4 (Signal) And Pad C404-1(27.368mm,42.529mm) on L4 (Signal) [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1024.076mil|Location2.X=1035.326mil|Location1.Y=2114.328mil|Location2.Y=2125.578mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1024.076mil|Location2.X=1035.326mil|Location1.Y=2114.328mil|Location2.Y=2125.578mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad D301-1(26.629mm,54.548mm) on L1 (Signal) And Pad D301-2(25.679mm,54.548mm) on L1 (Signal) [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=986.674mil|Location2.X=997.924mil|Location1.Y=2114.328mil|Location2.Y=2125.578mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=986.674mil|Location2.X=997.924mil|Location1.Y=2114.328mil|Location2.Y=2125.578mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad D301-2(25.679mm,54.548mm) on L1 (Signal) And Pad D301-3(24.729mm,54.548mm) on L1 (Signal) [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=986.674mil|Location2.X=997.924mil|Location1.Y=2260.123mil|Location2.Y=2271.373mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=986.674mil|Location2.X=997.924mil|Location1.Y=2260.123mil|Location2.Y=2271.373mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad D301-4(24.729mm,56.848mm) on L1 (Signal) And Pad D301-5(25.679mm,56.848mm) on L1 (Signal) [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1024.076mil|Location2.X=1035.326mil|Location1.Y=2260.123mil|Location2.Y=2271.373mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1024.076mil|Location2.X=1035.326mil|Location1.Y=2260.123mil|Location2.Y=2271.373mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad D301-5(25.679mm,56.848mm) on L1 (Signal) And Pad D301-6(26.629mm,56.848mm) on L1 (Signal) [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1153.468mil|Location2.X=1164.718mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1153.468mil|Location2.X=1164.718mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.22mm &lt; 0.254mm) Between Pad J300-1(30.101mm,63.015mm) on Multi-Layer And Pad J300-A1B12(28.981mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.22mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=865.282mil|Location2.X=876.532mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=865.282mil|Location2.X=876.532mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.22mm &lt; 0.254mm) Between Pad J300-2(21.461mm,63.015mm) on Multi-Layer And Pad J300-B1A12(22.581mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.22mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1119.61mil|Location2.X=1130.86mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1119.61mil|Location2.X=1130.86mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-A1B12(28.981mm,62.395mm) on L1 (Signal) And Pad J300-A4B9(28.181mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1088.117mil|Location2.X=1099.367mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1088.117mil|Location2.X=1099.367mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-A4B9(28.181mm,62.395mm) on L1 (Signal) And Pad J300-B8(27.531mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1048.745mil|Location2.X=1059.995mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1048.745mil|Location2.X=1059.995mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-A5(27.031mm,62.395mm) on L1 (Signal) And Pad J300-B7(26.531mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1068.43mil|Location2.X=1079.68mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1068.43mil|Location2.X=1079.68mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-A5(27.031mm,62.395mm) on L1 (Signal) And Pad J300-B8(27.531mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1009.375mil|Location2.X=1020.625mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1009.375mil|Location2.X=1020.625mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-A6(26.031mm,62.395mm) on L1 (Signal) And Pad J300-A7(25.531mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1029.06mil|Location2.X=1040.31mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1029.06mil|Location2.X=1040.31mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-A6(26.031mm,62.395mm) on L1 (Signal) And Pad J300-B7(26.531mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=989.69mil|Location2.X=1000.94mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=989.69mil|Location2.X=1000.94mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-A7(25.531mm,62.395mm) on L1 (Signal) And Pad J300-B6(25.031mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=950.32mil|Location2.X=961.57mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=950.32mil|Location2.X=961.57mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-A8(24.531mm,62.395mm) on L1 (Signal) And Pad J300-B5(24.031mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=970.005mil|Location2.X=981.255mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=970.005mil|Location2.X=981.255mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-A8(24.531mm,62.395mm) on L1 (Signal) And Pad J300-B6(25.031mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=899.14mil|Location2.X=910.39mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=899.14mil|Location2.X=910.39mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-B1A12(22.581mm,62.395mm) on L1 (Signal) And Pad J300-B4A9(23.381mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=930.633mil|Location2.X=941.883mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=930.633mil|Location2.X=941.883mil|Location1.Y=2477.264mil|Location2.Y=2488.514mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.254mm) Between Pad J300-B4A9(23.381mm,62.395mm) on L1 (Signal) And Pad J300-B5(24.031mm,62.395mm) on L1 (Signal) [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1562.091mil|Location2.X=1573.341mil|Location1.Y=971.322mil|Location2.Y=982.572mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1562.091mil|Location2.X=1573.341mil|Location1.Y=971.322mil|Location2.Y=982.572mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.241mm &lt; 0.254mm) Between Pad R201-1(40.12mm,25.536mm) on L1 (Signal) And Pad U201-4(40.066mm,24.042mm) on L1 (Signal) [Top Solder] Mask Sliver [0.241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1503.036mil|Location2.X=1514.286mil|Location1.Y=971.322mil|Location2.Y=982.572mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1503.036mil|Location2.X=1514.286mil|Location1.Y=971.322mil|Location2.Y=982.572mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.241mm &lt; 0.254mm) Between Pad R201-2(38.62mm,25.536mm) on L1 (Signal) And Pad U201-5(38.166mm,24.042mm) on L1 (Signal) [Top Solder] Mask Sliver [0.241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1197.17mil|Location2.X=1208.42mil|Location1.Y=791.769mil|Location2.Y=803.019mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1197.17mil|Location2.X=1208.42mil|Location1.Y=791.769mil|Location2.Y=803.019mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U200-1(30.876mm,19.804mm) on L1 (Signal) And Pad U200-2(30.226mm,19.804mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1171.58mil|Location2.X=1182.83mil|Location1.Y=791.769mil|Location2.Y=803.019mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1171.58mil|Location2.X=1182.83mil|Location1.Y=791.769mil|Location2.Y=803.019mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U200-2(30.226mm,19.804mm) on L1 (Signal) And Pad U200-3(29.576mm,19.804mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1171.58mil|Location2.X=1182.83mil|Location1.Y=705.155mil|Location2.Y=716.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1171.58mil|Location2.X=1182.83mil|Location1.Y=705.155mil|Location2.Y=716.405mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U200-4(29.576mm,17.604mm) on L1 (Signal) And Pad U200-5(30.226mm,17.604mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1197.17mil|Location2.X=1208.42mil|Location1.Y=705.155mil|Location2.Y=716.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1197.17mil|Location2.X=1208.42mil|Location1.Y=705.155mil|Location2.Y=716.405mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.25mm &lt; 0.254mm) Between Pad U200-5(30.226mm,17.604mm) on L1 (Signal) And Pad U200-6(30.876mm,17.604mm) on L1 (Signal) [Top Solder] Mask Sliver [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1515.675mil|Location2.X=1526.925mil|Location1.Y=864.213mil|Location2.Y=875.463mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1515.675mil|Location2.X=1526.925mil|Location1.Y=864.213mil|Location2.Y=875.463mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U201-1(38.166mm,21.442mm) on L1 (Signal) And Pad U201-2(39.116mm,21.442mm) on L1 (Signal) [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1553.075mil|Location2.X=1564.325mil|Location1.Y=864.213mil|Location2.Y=875.463mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1553.075mil|Location2.X=1564.325mil|Location1.Y=864.213mil|Location2.Y=875.463mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U201-2(39.116mm,21.442mm) on L1 (Signal) And Pad U201-3(40.066mm,21.442mm) on L1 (Signal) [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDDW0N2L3MRXP11LU4EZCHMIWYISPD2AGMUSMVLVX1IVYGKWIOAJ"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1211.757mil|Location2.X=1219.424mil|Location1.Y=820.135mil|Location2.Y=827.802mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1211.757mil|Location2.X=1219.424mil|Location1.Y=820.135mil|Location2.Y=827.802mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (30.876mm,20.804mm) on Top Overlay And Pad C200-2(30.976mm,21.498mm) on L1 (Signal) [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1480.754mil|Location2.X=1492.004mil|Location1.Y=829.75mil|Location2.Y=841mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1480.754mil|Location2.X=1492.004mil|Location1.Y=829.75mil|Location2.Y=841mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.224mm &lt; 0.254mm) Between Arc (37.465mm,21.219mm) on Top Overlay And Pad U201-1(38.166mm,21.442mm) on L1 (Signal) [Top Overlay] to [Top Solder] clearance [0.224mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1885.397mil|Location2.X=1896.647mil|Location1.Y=1996.224mil|Location2.Y=2007.474mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1885.397mil|Location2.X=1896.647mil|Location1.Y=1996.224mil|Location2.Y=2007.474mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Arc (48.408mm,50.847mm) on Top Overlay And Pad U100A-1(47.676mm,50.847mm) on L1 (Signal) [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2450.396mil|Location2.X=2461.646mil|Location1.Y=1999.315mil|Location2.Y=2010.565mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2450.396mil|Location2.X=2461.646mil|Location1.Y=1999.315mil|Location2.Y=2010.565mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Arc (62.759mm,50.925mm) on Top Overlay And Pad U100B-1(62.027mm,50.926mm) on L1 (Signal) [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1256.751mil|Location2.X=1268.001mil|Location1.Y=2198.407mil|Location2.Y=2209.657mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1256.751mil|Location2.X=1268.001mil|Location1.Y=2198.407mil|Location2.Y=2209.657mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad D300-K(32.664mm,56.282mm) on L1 (Signal) And Track (31.864mm,55.532mm)(31.864mm,56.232mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1264.627mil|Location2.X=1275.877mil|Location1.Y=2189.546mil|Location2.Y=2200.796mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1264.627mil|Location2.X=1275.877mil|Location1.Y=2189.546mil|Location2.Y=2200.796mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad D300-K(32.664mm,56.282mm) on L1 (Signal) And Track (31.864mm,55.532mm)(33.464mm,55.532mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1303.999mil|Location2.X=1315.249mil|Location1.Y=2198.407mil|Location2.Y=2209.657mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1303.999mil|Location2.X=1315.249mil|Location1.Y=2198.407mil|Location2.Y=2209.657mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad D300-K(32.664mm,56.282mm) on L1 (Signal) And Track (33.464mm,55.532mm)(33.464mm,56.232mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=129.879mil|Location2.X=141.129mil|Location1.Y=1969.787mil|Location2.Y=1981.037mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=129.879mil|Location2.X=141.129mil|Location1.Y=1969.787mil|Location2.Y=1981.037mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.251mm &lt; 0.254mm) Between Pad P400-1(4.242mm,51.101mm) on Multi-Layer And Track (2.992mm,49.923mm)(5.492mm,49.923mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.251mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2562.879mil|Location2.X=2574.129mil|Location1.Y=1962.937mil|Location2.Y=1974.187mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2562.879mil|Location2.X=2574.129mil|Location1.Y=1962.937mil|Location2.Y=1974.187mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.251mm &lt; 0.254mm) Between Pad P401-1(66.04mm,50.927mm) on Multi-Layer And Track (64.79mm,49.749mm)(67.29mm,49.749mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.251mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1777.242mil|Location2.X=1788.492mil|Location1.Y=2121.462mil|Location2.Y=2132.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1777.242mil|Location2.X=1788.492mil|Location1.Y=2121.462mil|Location2.Y=2132.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad Q100A-1(45.71mm,53.403mm) on L1 (Signal) And Track (45.134mm,53.677mm)(45.134mm,55.129mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1809.1mil|Location2.X=1820.35mil|Location1.Y=2107.634mil|Location2.Y=2118.884mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1809.1mil|Location2.X=1820.35mil|Location1.Y=2107.634mil|Location2.Y=2118.884mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad Q100A-1(45.71mm,53.403mm) on L1 (Signal) And Track (46.204mm,53.677mm)(47.115mm,53.677mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1853.65mil|Location2.X=1864.9mil|Location1.Y=2107.634mil|Location2.Y=2118.884mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1853.65mil|Location2.X=1864.9mil|Location1.Y=2107.634mil|Location2.Y=2118.884mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad Q100A-2(47.61mm,53.403mm) on L1 (Signal) And Track (46.204mm,53.677mm)(47.115mm,53.677mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1885.508mil|Location2.X=1896.758mil|Location1.Y=2121.462mil|Location2.Y=2132.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1885.508mil|Location2.X=1896.758mil|Location1.Y=2121.462mil|Location2.Y=2132.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad Q100A-2(47.61mm,53.403mm) on L1 (Signal) And Track (48.186mm,53.677mm)(48.186mm,55.129mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1816.249mil|Location2.X=1827.499mil|Location1.Y=2164.816mil|Location2.Y=2176.066mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1816.249mil|Location2.X=1827.499mil|Location1.Y=2164.816mil|Location2.Y=2176.066mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad Q100A-3(46.66mm,55.403mm) on L1 (Signal) And Track (45.134mm,55.129mm)(46.165mm,55.129mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1846.501mil|Location2.X=1857.751mil|Location1.Y=2164.816mil|Location2.Y=2176.066mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1846.501mil|Location2.X=1857.751mil|Location1.Y=2164.816mil|Location2.Y=2176.066mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad Q100A-3(46.66mm,55.403mm) on L1 (Signal) And Track (47.154mm,55.129mm)(48.186mm,55.129mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2340.242mil|Location2.X=2351.492mil|Location1.Y=2124.611mil|Location2.Y=2135.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2340.242mil|Location2.X=2351.492mil|Location1.Y=2124.611mil|Location2.Y=2135.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad Q100B-1(60.01mm,53.483mm) on L1 (Signal) And Track (59.434mm,53.757mm)(59.434mm,55.209mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2372.1mil|Location2.X=2383.35mil|Location1.Y=2110.784mil|Location2.Y=2122.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2372.1mil|Location2.X=2383.35mil|Location1.Y=2110.784mil|Location2.Y=2122.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad Q100B-1(60.01mm,53.483mm) on L1 (Signal) And Track (60.505mm,53.757mm)(61.415mm,53.757mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2416.65mil|Location2.X=2427.9mil|Location1.Y=2110.784mil|Location2.Y=2122.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2416.65mil|Location2.X=2427.9mil|Location1.Y=2110.784mil|Location2.Y=2122.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad Q100B-2(61.91mm,53.483mm) on L1 (Signal) And Track (60.505mm,53.757mm)(61.415mm,53.757mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2448.508mil|Location2.X=2459.758mil|Location1.Y=2124.611mil|Location2.Y=2135.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2448.508mil|Location2.X=2459.758mil|Location1.Y=2124.611mil|Location2.Y=2135.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad Q100B-2(61.91mm,53.483mm) on L1 (Signal) And Track (62.486mm,53.757mm)(62.486mm,55.209mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2379.249mil|Location2.X=2390.499mil|Location1.Y=2167.966mil|Location2.Y=2179.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2379.249mil|Location2.X=2390.499mil|Location1.Y=2167.966mil|Location2.Y=2179.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad Q100B-3(60.96mm,55.483mm) on L1 (Signal) And Track (59.434mm,55.209mm)(60.465mm,55.209mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2409.501mil|Location2.X=2420.751mil|Location1.Y=2167.966mil|Location2.Y=2179.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2409.501mil|Location2.X=2420.751mil|Location1.Y=2167.966mil|Location2.Y=2179.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad Q100B-3(60.96mm,55.483mm) on L1 (Signal) And Track (61.455mm,55.209mm)(62.486mm,55.209mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1334.296mil|Location2.X=1345.546mil|Location1.Y=457.092mil|Location2.Y=468.342mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1334.296mil|Location2.X=1345.546mil|Location1.Y=457.092mil|Location2.Y=468.342mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad R203-1(32.767mm,13.665mm) on L1 (Signal) And Track (31.575mm,11.601mm)(34.263mm,11.601mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1334.296mil|Location2.X=1345.546mil|Location1.Y=607.658mil|Location2.Y=618.908mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1334.296mil|Location2.X=1345.546mil|Location1.Y=607.658mil|Location2.Y=618.908mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad R203-1(32.767mm,13.665mm) on L1 (Signal) And Track (31.575mm,15.73mm)(34.263mm,15.73mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1337.296mil|Location2.X=1348.546mil|Location1.Y=460.091mil|Location2.Y=471.341mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1337.296mil|Location2.X=1348.546mil|Location1.Y=460.091mil|Location2.Y=471.341mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad R203-1(32.767mm,13.665mm) on L1 (Signal) And Track (34.263mm,11.601mm)(34.263mm,15.73mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1021.454mil|Location2.X=1032.704mil|Location1.Y=460.091mil|Location2.Y=471.341mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1021.454mil|Location2.X=1032.704mil|Location1.Y=460.091mil|Location2.Y=471.341mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad R203-2(27.431mm,13.665mm) on L1 (Signal) And Track (25.935mm,11.601mm)(25.935mm,15.73mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1024.454mil|Location2.X=1035.704mil|Location1.Y=457.092mil|Location2.Y=468.342mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1024.454mil|Location2.X=1035.704mil|Location1.Y=457.092mil|Location2.Y=468.342mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad R203-2(27.431mm,13.665mm) on L1 (Signal) And Track (25.935mm,11.601mm)(28.623mm,11.601mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1024.454mil|Location2.X=1035.704mil|Location1.Y=607.658mil|Location2.Y=618.908mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1024.454mil|Location2.X=1035.704mil|Location1.Y=607.658mil|Location2.Y=618.908mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad R203-2(27.431mm,13.665mm) on L1 (Signal) And Track (25.935mm,15.73mm)(28.623mm,15.73mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=418.495mil|Location2.X=429.745mil|Location1.Y=2633.304mil|Location2.Y=2644.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=418.495mil|Location2.X=429.745mil|Location1.Y=2633.304mil|Location2.Y=2644.554mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.055mm &lt; 0.254mm) Between Pad SW400-1(10.023mm,67.556mm) on L1 (Signal) And Track (10.773mm,64.538mm)(10.773mm,66.874mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.055mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=425.447mil|Location2.X=436.697mil|Location1.Y=2646.386mil|Location2.Y=2657.636mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=425.447mil|Location2.X=436.697mil|Location1.Y=2646.386mil|Location2.Y=2657.636mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.153mm &lt; 0.254mm) Between Pad SW400-1(10.023mm,67.556mm) on L1 (Signal) And Track (11.153mm,67.361mm)(12.048mm,68.256mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.153mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=612.342mil|Location2.X=623.592mil|Location1.Y=2646.386mil|Location2.Y=2657.636mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=612.342mil|Location2.X=623.592mil|Location1.Y=2646.386mil|Location2.Y=2657.636mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.153mm &lt; 0.254mm) Between Pad SW400-2(16.623mm,67.556mm) on L1 (Signal) And Track (14.598mm,68.256mm)(15.493mm,67.361mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.153mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=619.295mil|Location2.X=630.545mil|Location1.Y=2633.304mil|Location2.Y=2644.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=619.295mil|Location2.X=630.545mil|Location1.Y=2633.304mil|Location2.Y=2644.554mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.055mm &lt; 0.254mm) Between Pad SW400-2(16.623mm,67.556mm) on L1 (Signal) And Track (15.873mm,64.538mm)(15.873mm,66.874mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.055mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=418.495mil|Location2.X=429.745mil|Location1.Y=2529.146mil|Location2.Y=2540.396mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=418.495mil|Location2.X=429.745mil|Location1.Y=2529.146mil|Location2.Y=2540.396mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.055mm &lt; 0.254mm) Between Pad SW400-3(10.023mm,63.856mm) on L1 (Signal) And Track (10.773mm,64.538mm)(10.773mm,66.874mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.055mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=425.447mil|Location2.X=436.697mil|Location1.Y=2516.064mil|Location2.Y=2527.314mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=425.447mil|Location2.X=436.697mil|Location1.Y=2516.064mil|Location2.Y=2527.314mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.153mm &lt; 0.254mm) Between Pad SW400-3(10.023mm,63.856mm) on L1 (Signal) And Track (11.153mm,64.051mm)(12.048mm,63.156mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.153mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=612.342mil|Location2.X=623.592mil|Location1.Y=2516.064mil|Location2.Y=2527.314mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=612.342mil|Location2.X=623.592mil|Location1.Y=2516.064mil|Location2.Y=2527.314mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.153mm &lt; 0.254mm) Between Pad SW400-4(16.623mm,63.856mm) on L1 (Signal) And Track (14.598mm,63.156mm)(15.493mm,64.051mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.153mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=619.295mil|Location2.X=630.545mil|Location1.Y=2529.147mil|Location2.Y=2540.397mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=619.295mil|Location2.X=630.545mil|Location1.Y=2529.147mil|Location2.Y=2540.397mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.055mm &lt; 0.254mm) Between Pad SW400-4(16.623mm,63.856mm) on L1 (Signal) And Track (15.873mm,64.538mm)(15.873mm,66.874mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.055mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1871.375mil|Location2.X=1882.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1871.375mil|Location2.X=1882.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-1(47.676mm,50.847mm) on L1 (Signal) And Track (38.155mm,49.746mm)(48.307mm,49.746mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1571.375mil|Location2.X=1582.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1571.375mil|Location2.X=1582.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-10(40.056mm,45.102mm) on L1 (Signal) And Track (38.155mm,46.203mm)(48.307mm,46.203mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1621.375mil|Location2.X=1632.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1621.375mil|Location2.X=1632.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-11(41.326mm,45.102mm) on L1 (Signal) And Track (38.155mm,46.203mm)(48.307mm,46.203mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1671.375mil|Location2.X=1682.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1671.375mil|Location2.X=1682.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-12(42.596mm,45.102mm) on L1 (Signal) And Track (38.155mm,46.203mm)(48.307mm,46.203mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1721.375mil|Location2.X=1732.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1721.375mil|Location2.X=1732.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-13(43.866mm,45.102mm) on L1 (Signal) And Track (38.155mm,46.203mm)(48.307mm,46.203mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1771.375mil|Location2.X=1782.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1771.375mil|Location2.X=1782.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-14(45.136mm,45.102mm) on L1 (Signal) And Track (38.155mm,46.203mm)(48.307mm,46.203mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1821.375mil|Location2.X=1832.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1821.375mil|Location2.X=1832.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-15(46.406mm,45.102mm) on L1 (Signal) And Track (38.155mm,46.203mm)(48.307mm,46.203mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1871.375mil|Location2.X=1882.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1871.375mil|Location2.X=1882.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-16(47.676mm,45.102mm) on L1 (Signal) And Track (38.155mm,46.203mm)(48.307mm,46.203mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1821.375mil|Location2.X=1832.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1821.375mil|Location2.X=1832.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-2(46.406mm,50.847mm) on L1 (Signal) And Track (38.155mm,49.746mm)(48.307mm,49.746mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1771.375mil|Location2.X=1782.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1771.375mil|Location2.X=1782.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-3(45.136mm,50.847mm) on L1 (Signal) And Track (38.155mm,49.746mm)(48.307mm,49.746mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1721.375mil|Location2.X=1732.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1721.375mil|Location2.X=1732.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-4(43.866mm,50.847mm) on L1 (Signal) And Track (38.155mm,49.746mm)(48.307mm,49.746mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1671.375mil|Location2.X=1682.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1671.375mil|Location2.X=1682.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-5(42.596mm,50.847mm) on L1 (Signal) And Track (38.155mm,49.746mm)(48.307mm,49.746mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1621.375mil|Location2.X=1632.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1621.375mil|Location2.X=1632.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-6(41.326mm,50.847mm) on L1 (Signal) And Track (38.155mm,49.746mm)(48.307mm,49.746mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1571.375mil|Location2.X=1582.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1571.375mil|Location2.X=1582.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-7(40.056mm,50.847mm) on L1 (Signal) And Track (38.155mm,49.746mm)(48.307mm,49.746mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1521.375mil|Location2.X=1532.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1521.375mil|Location2.X=1532.625mil|Location1.Y=1958.872mil|Location2.Y=1970.122mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-8(38.786mm,50.847mm) on L1 (Signal) And Track (38.155mm,49.746mm)(48.307mm,49.746mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1521.375mil|Location2.X=1532.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1521.375mil|Location2.X=1532.625mil|Location1.Y=1807.397mil|Location2.Y=1818.647mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100A-9(38.786mm,45.102mm) on L1 (Signal) And Track (38.155mm,46.203mm)(48.307mm,46.203mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2436.375mil|Location2.X=2447.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2436.375mil|Location2.X=2447.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-1(62.027mm,50.926mm) on L1 (Signal) And Track (52.506mm,49.824mm)(62.658mm,49.824mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2136.375mil|Location2.X=2147.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2136.375mil|Location2.X=2147.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-10(54.407mm,45.18mm) on L1 (Signal) And Track (52.506mm,46.282mm)(62.658mm,46.282mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2186.375mil|Location2.X=2197.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2186.375mil|Location2.X=2197.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-11(55.677mm,45.18mm) on L1 (Signal) And Track (52.506mm,46.282mm)(62.658mm,46.282mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236.375mil|Location2.X=2247.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236.375mil|Location2.X=2247.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-12(56.947mm,45.18mm) on L1 (Signal) And Track (52.506mm,46.282mm)(62.658mm,46.282mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2286.375mil|Location2.X=2297.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2286.375mil|Location2.X=2297.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-13(58.217mm,45.18mm) on L1 (Signal) And Track (52.506mm,46.282mm)(62.658mm,46.282mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2336.375mil|Location2.X=2347.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2336.375mil|Location2.X=2347.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-14(59.487mm,45.18mm) on L1 (Signal) And Track (52.506mm,46.282mm)(62.658mm,46.282mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386.375mil|Location2.X=2397.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386.375mil|Location2.X=2397.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-15(60.757mm,45.18mm) on L1 (Signal) And Track (52.506mm,46.282mm)(62.658mm,46.282mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2436.375mil|Location2.X=2447.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2436.375mil|Location2.X=2447.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-16(62.027mm,45.18mm) on L1 (Signal) And Track (52.506mm,46.282mm)(62.658mm,46.282mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386.375mil|Location2.X=2397.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386.375mil|Location2.X=2397.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-2(60.757mm,50.926mm) on L1 (Signal) And Track (52.506mm,49.824mm)(62.658mm,49.824mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2336.375mil|Location2.X=2347.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2336.375mil|Location2.X=2347.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-3(59.487mm,50.926mm) on L1 (Signal) And Track (52.506mm,49.824mm)(62.658mm,49.824mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2286.375mil|Location2.X=2297.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2286.375mil|Location2.X=2297.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-4(58.217mm,50.926mm) on L1 (Signal) And Track (52.506mm,49.824mm)(62.658mm,49.824mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236.375mil|Location2.X=2247.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2236.375mil|Location2.X=2247.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-5(56.947mm,50.926mm) on L1 (Signal) And Track (52.506mm,49.824mm)(62.658mm,49.824mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2186.375mil|Location2.X=2197.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2186.375mil|Location2.X=2197.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-6(55.677mm,50.926mm) on L1 (Signal) And Track (52.506mm,49.824mm)(62.658mm,49.824mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2136.375mil|Location2.X=2147.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2136.375mil|Location2.X=2147.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-7(54.407mm,50.926mm) on L1 (Signal) And Track (52.506mm,49.824mm)(62.658mm,49.824mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2086.375mil|Location2.X=2097.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2086.375mil|Location2.X=2097.625mil|Location1.Y=1961.963mil|Location2.Y=1973.213mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-8(53.137mm,50.926mm) on L1 (Signal) And Track (52.506mm,49.824mm)(62.658mm,49.824mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2086.375mil|Location2.X=2097.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2086.375mil|Location2.X=2097.625mil|Location1.Y=1810.488mil|Location2.Y=1821.738mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.152mm &lt; 0.254mm) Between Pad U100B-9(53.137mm,45.18mm) on L1 (Signal) And Track (52.506mm,46.282mm)(62.658mm,46.282mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1480.241mil|Location2.X=1491.491mil|Location1.Y=860.213mil|Location2.Y=871.463mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1480.241mil|Location2.X=1491.491mil|Location1.Y=860.213mil|Location2.Y=871.463mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U201-1(38.166mm,21.442mm) on L1 (Signal) And Track (37.566mm,21.842mm)(37.566mm,23.642mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.114mil|Location2.X=1494.364mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.114mil|Location2.X=1494.364mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.104mm &lt; 0.254mm) Between Pad U201-1(38.166mm,21.442mm) on L1 (Signal) And Track (37.566mm,21.842mm)(37.712mm,21.842mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.104mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1510.836mil|Location2.X=1522.086mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1510.836mil|Location2.X=1522.086mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.104mm &lt; 0.254mm) Between Pad U201-1(38.166mm,21.442mm) on L1 (Signal) And Track (38.62mm,21.842mm)(38.662mm,21.842mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.104mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1520.514mil|Location2.X=1531.764mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1520.514mil|Location2.X=1531.764mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.104mm &lt; 0.254mm) Between Pad U201-2(39.116mm,21.442mm) on L1 (Signal) And Track (38.62mm,21.842mm)(38.662mm,21.842mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.104mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1548.236mil|Location2.X=1559.486mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1548.236mil|Location2.X=1559.486mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.104mm &lt; 0.254mm) Between Pad U201-2(39.116mm,21.442mm) on L1 (Signal) And Track (39.57mm,21.842mm)(39.612mm,21.842mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.104mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1557.914mil|Location2.X=1569.164mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1557.914mil|Location2.X=1569.164mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.104mm &lt; 0.254mm) Between Pad U201-3(40.066mm,21.442mm) on L1 (Signal) And Track (39.57mm,21.842mm)(39.612mm,21.842mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.104mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.636mil|Location2.X=1596.886mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.636mil|Location2.X=1596.886mil|Location1.Y=854.313mil|Location2.Y=865.563mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.104mm &lt; 0.254mm) Between Pad U201-3(40.066mm,21.442mm) on L1 (Signal) And Track (40.52mm,21.842mm)(40.666mm,21.842mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.104mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1588.507mil|Location2.X=1599.757mil|Location1.Y=860.213mil|Location2.Y=871.463mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1588.507mil|Location2.X=1599.757mil|Location1.Y=860.213mil|Location2.Y=871.463mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U201-3(40.066mm,21.442mm) on L1 (Signal) And Track (40.666mm,21.842mm)(40.666mm,23.642mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1557.914mil|Location2.X=1569.164mil|Location1.Y=925.18mil|Location2.Y=936.43mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1557.914mil|Location2.X=1569.164mil|Location1.Y=925.18mil|Location2.Y=936.43mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.104mm &lt; 0.254mm) Between Pad U201-4(40.066mm,24.042mm) on L1 (Signal) And Track (38.62mm,23.642mm)(39.612mm,23.642mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.104mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.636mil|Location2.X=1596.886mil|Location1.Y=925.18mil|Location2.Y=936.43mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1585.636mil|Location2.X=1596.886mil|Location1.Y=925.18mil|Location2.Y=936.43mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.104mm &lt; 0.254mm) Between Pad U201-4(40.066mm,24.042mm) on L1 (Signal) And Track (40.52mm,23.642mm)(40.666mm,23.642mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.104mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1588.507mil|Location2.X=1599.757mil|Location1.Y=919.277mil|Location2.Y=930.527mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1588.507mil|Location2.X=1599.757mil|Location1.Y=919.277mil|Location2.Y=930.527mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U201-4(40.066mm,24.042mm) on L1 (Signal) And Track (40.666mm,21.842mm)(40.666mm,23.642mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1480.241mil|Location2.X=1491.491mil|Location1.Y=919.277mil|Location2.Y=930.527mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1480.241mil|Location2.X=1491.491mil|Location1.Y=919.277mil|Location2.Y=930.527mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad U201-5(38.166mm,24.042mm) on L1 (Signal) And Track (37.566mm,21.842mm)(37.566mm,23.642mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.114mil|Location2.X=1494.364mil|Location1.Y=925.18mil|Location2.Y=936.43mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.114mil|Location2.X=1494.364mil|Location1.Y=925.18mil|Location2.Y=936.43mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.104mm &lt; 0.254mm) Between Pad U201-5(38.166mm,24.042mm) on L1 (Signal) And Track (37.566mm,23.642mm)(37.712mm,23.642mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.104mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1510.836mil|Location2.X=1522.086mil|Location1.Y=925.18mil|Location2.Y=936.43mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Thrust Stand Controller Revised_1\Thrust Stand Controller.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1510.836mil|Location2.X=1522.086mil|Location1.Y=925.18mil|Location2.Y=936.43mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.104mm &lt; 0.254mm) Between Pad U201-5(38.166mm,24.042mm) on L1 (Signal) And Track (38.62mm,23.642mm)(39.612mm,23.642mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.104mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
