@@ -1,0 +1,13 @@
+Removed Pin From Net: NetName=USB_CC2 Pin=J300-A5
+Removed Pin From Net: NetName=USB_CC1 Pin=J300-B5
+Removed Pin From Net: NetName=USB_D_P Pin=J300-B6
+Removed Pin From Net: NetName=VBUS Pin=J300-B9
+Change Component Footprint: Designator=J300 Old Footprint=USB31-TYPE-C-FSABC New Footprint=TYPEC-324-BCP24
+Change Component Comment : Designator=J300 Old Comment=USB31-TYPE-C-FSABC New Comment=TYPEC-324-BCP24
+Change component parameters: Designator = "J300" ("J300"); Footprint = "USB31-TYPE-C-FSABC"; UniqueID = "\RVQOJGIP\LPUCUDFE" ("\RVQOJGIP\LPUCUDFE")
+Change component parameters (AddParameter): Name = "JLCPCB Part #"; Value = "C2835314"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "XUNPU"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MFR.Part #"; Value = "TYPEC-324-BCP24"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SMD"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=USB_CC1 Pin=J300-A5
+Added Pin To Net: NetName=USB_CC2 Pin=J300-B5
