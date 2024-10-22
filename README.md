@@ -5,11 +5,8 @@ The **Thrust Stand Controller** is a hardware project designed for measuring mot
 
 ## Features
 - **Thrust and Torque Measurement**: Uses dual HX711 load cell amplifiers to measure thrust and torque from the motor.
-- **Power Monitoring**: Integrated voltage and current sensors for real-time power consumption analysis.
+- **Power Monitoring**: Integrated voltage and current sensors for real-time power consumption analysis. It is rated for 33V and 55A.
 - **Microcontroller (ATMEGA32U4-AU)**: Responsible for interfacing with sensors and controlling PWM signals for the motor's ESC.
 - **USB-C Connector**: Provides both power supply and data transfer capabilities.
 - **ESC PWM Control**: Allows real-time adjustments of motor speed during tests via a 2-pin header for PWM control.
 - **Flexible Design**: Added GPIO pin headers and solder pads for easy expansion and motor connection.
-
-## Documentation
-The documentation for the hardware design is also attached above.
